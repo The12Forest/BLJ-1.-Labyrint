@@ -1,34 +1,28 @@
-float circleX; 
-float circleY;
+int score = 10;
+
+
+//Ball cords and Size
+float circleX = 60; 
+float circleY = 60;
 float circleSize = 100;
+int shrink = 9;
+
+//Tracking
 boolean dragging = false;  
-int shrink = 9
-
-
-int score = 10;        // Start-Score
 boolean touching = false;  
 
 boolean running = true;
 
 
+//Color of the Ball
 int ccr = 211;
 int ccg = 211;
 int ccb = 211;
-
-
 int round = 40;
 
 
 void settings() {
   fullScreen();
-}
-
-void setup() {
-  // Spawnpunkt in der Mitte des roten Quadrats
-  circleX = 60;  
-  circleY = 60;
-  
-  
 }
 
 void draw() {
@@ -69,14 +63,16 @@ void draw() {
         if (circleSize > 5) {
           circleSize -= shrink;
         }
+        
+        dragging = false;
         score--;
-        println("Score: " + score + " | Kreisgröße: " + circleSize);
         
         ccr = 255;
         ccg = 0;
         ccb = 0;
         round = 40;
       } else {
+        
         if (round == 0) {
           ccr = 211;
           ccg = 211;
@@ -84,7 +80,8 @@ void draw() {
         } else {
           round--;
         }
-      } 
+      }
+      
       touching = isTouching;
   
       if (!isTouching) {
@@ -93,7 +90,8 @@ void draw() {
       }
     }
     
-    // === Kreis erst jetzt zeichnen ===
+    //Kreis Zeichnen
+    
     stroke(211);
     fill(ccr, ccg, ccb);
     ellipse(circleX, circleY, circleSize, circleSize); 
@@ -102,13 +100,13 @@ void draw() {
     // Score anzeigen
     fill(0);
     textSize(24);
-    text("Score: " + (10 - score), 20, 40);
+    text("Score: " + score, 20, 40);
     
+    // Finish triggers
     if (score == 0) {
         finish(false);
     }
-    
-    if (circleX >= 1800) {
+    if (circleX >= 1805 + (circleSize/2)) {
       finish(true);
     }
   }
@@ -125,12 +123,21 @@ void finish(boolean win) {
     background(255,0,0);
   }
   
+  PFont font;
+  font = loadFont("Anurati-Regular-48.vlw");
+  textFont(font);
+  
+  
   fill(0);
   textAlign(CENTER);
-  textSize(70);
-  text("Ende", 960, 300);
+  textSize(100);
+  text("ENDE", 960, 300);
+  
+  font = loadFont("AgencyFB-Bold-48.vlw");
+  textFont(font);
+  
   textSize(50);
-  text("Score: " + (10 - score), 960, 540);
+  text("SCORE: " + score, 960, 540);
 }
 
 
@@ -144,16 +151,8 @@ void mousePressed() {
 void mouseReleased() {
   dragging = false;
 }
-/*
-// Prüft, ob der gesamte Kreis auf weißem Korridor bleibt
-boolean isWhiteArea(float x, float y) {
-  
-  
-  return true;
-}
 
 
-*/
 
 boolean isWhiteArea(float x, float y, float r) {
   int steps = 36;
