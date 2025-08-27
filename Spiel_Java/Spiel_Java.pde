@@ -2,8 +2,10 @@ float circleX;
 float circleY;
 float circleSize = 100;
 boolean dragging = false;  
+int shrink = 9
 
-int score = 3;        // Start-Score
+
+int score = 10;        // Start-Score
 boolean touching = false;  
 
 boolean running = true;
@@ -65,7 +67,7 @@ void draw() {
   
       if (isTouching && !touching) {
         if (circleSize > 5) {
-          circleSize -= 1;
+          circleSize -= shrink;
         }
         score--;
         println("Score: " + score + " | Kreisgröße: " + circleSize);
@@ -73,7 +75,7 @@ void draw() {
         ccr = 255;
         ccg = 0;
         ccb = 0;
-        round = 100;
+        round = 40;
       } else {
         if (round == 0) {
           ccr = 211;
@@ -100,7 +102,7 @@ void draw() {
     // Score anzeigen
     fill(0);
     textSize(24);
-    text("Score: " + ((100 - score) * -1), 20, 40);
+    text("Score: " + (10 - score), 20, 40);
     
     if (score == 0) {
         finish(false);
@@ -117,23 +119,18 @@ void draw() {
 void finish(boolean win) {
   running = false;
 
-  
-  
   if (win) {
     background(0,255,0);
   } else {
     background(255,0,0);
   }
-
   
   fill(0);
   textAlign(CENTER);
   textSize(70);
   text("Ende", 960, 300);
   textSize(50);
-  text("Score: " + ((score - 100) * -1), 960, 540);
-
-  
+  text("Score: " + (10 - score), 960, 540);
 }
 
 
@@ -147,8 +144,17 @@ void mousePressed() {
 void mouseReleased() {
   dragging = false;
 }
-
+/*
 // Prüft, ob der gesamte Kreis auf weißem Korridor bleibt
+boolean isWhiteArea(float x, float y) {
+  
+  
+  return true;
+}
+
+
+*/
+
 boolean isWhiteArea(float x, float y, float r) {
   int steps = 36;
   for (int i = 0; i < steps; i++) {
