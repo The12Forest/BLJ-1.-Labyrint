@@ -13,8 +13,8 @@ int ccr = 211;
 int ccg = 211;
 int ccb = 211;
 
-int round = 10
 
+int round = 40;
 
 
 void settings() {
@@ -73,13 +73,15 @@ void draw() {
         ccr = 255;
         ccg = 0;
         ccb = 0;
-        round = 10;
+        round = 100;
       } else {
         if (round == 0) {
           ccr = 211;
           ccg = 211;
           ccb = 211;
-        } 
+        } else {
+          round--;
+        }
       } 
       touching = isTouching;
   
