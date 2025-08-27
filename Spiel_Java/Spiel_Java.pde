@@ -13,6 +13,8 @@ int ccr = 211;
 int ccg = 211;
 int ccb = 211;
 
+int round = 10
+
 
 
 void settings() {
@@ -71,11 +73,14 @@ void draw() {
         ccr = 255;
         ccg = 0;
         ccb = 0;
+        round = 10;
       } else {
-        ccr = 211;
-        ccg = 211;
-        ccb = 211;
-      }
+        if (round == 0) {
+          ccr = 211;
+          ccg = 211;
+          ccb = 211;
+        } 
+      } 
       touching = isTouching;
   
       if (!isTouching) {
@@ -88,6 +93,7 @@ void draw() {
     stroke(211);
     fill(ccr, ccg, ccb);
     ellipse(circleX, circleY, circleSize, circleSize); 
+    
   
     // Score anzeigen
     fill(0);
