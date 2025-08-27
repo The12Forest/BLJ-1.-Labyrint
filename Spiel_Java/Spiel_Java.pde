@@ -2,61 +2,52 @@ float circleX;
 float circleY;
 float circleSize = 100;
 boolean dragging = false;  
-int shrink = 9
+int shrink = 9;
 
-
-int score = 10;        // Start-Score
+int score = 10;        // Start-Score (Anzahl "Leben")
 boolean touching = false;  
-
 boolean running = true;
-
 
 int ccr = 211;
 int ccg = 211;
 int ccb = 211;
 
-
 int round = 40;
-
 
 void settings() {
   fullScreen();
 }
 
 void setup() {
-  // Spawnpunkt in der Mitte des roten Quadrats
-  circleX = 60;  
-  circleY = 60;
-  
-  
+  startGame(); 
 }
 
 void draw() {
   if (running) {
-    background(0,0,200); // Blau = Wand
+    background(0, 0, 200); // Blau = Wand
 
     // Startpunkt (rot)
-    fill(255,0,0);
+    fill(255, 0, 0);
     noStroke();
-    rect(0,0,120,120);
+    rect(0, 0, 120, 120);
   
     // Korridore (weiß)
     stroke(255);
     fill(255);
-    rect(120,0,880,120);
-    rect(1000,0,120,470);
-    rect(1000,350,-800,120);
-    rect(200,350,120,470);
-    rect(200,700,1200,120);
-    rect(1280,220,120,600);
-    rect(1280,200,300,120);
-    rect(1575,200,120,800);
-    rect(1575,900,400,120);
+    rect(120, 0, 880, 120);
+    rect(1000, 0, 120, 470);
+    rect(1000, 350, -800, 120);
+    rect(200, 350, 120, 470);
+    rect(200, 700, 1200, 120);
+    rect(1280, 220, 120, 600);
+    rect(1280, 200, 300, 120);
+    rect(1575, 200, 120, 800);
+    rect(1575, 900, 400, 120);
   
     // Endpunkt (grün)
     stroke(255);
-    fill(0,255,0);
-    rect(1800,900,120,120);
+    fill(0, 255, 0);
+    rect(1800, 900, 120, 120);
   
     // === Bewegung berechnen ===
     if (dragging) {
@@ -93,19 +84,18 @@ void draw() {
       }
     }
     
-    // === Kreis erst jetzt zeichnen ===
+    // === Kreis zeichnen ===
     stroke(211);
     fill(ccr, ccg, ccb);
     ellipse(circleX, circleY, circleSize, circleSize); 
-    
   
     // Score anzeigen
     fill(0);
     textSize(24);
-    text("Score: " + (10 - score), 20, 40);
+    text("Score: " + score, 20, 40);
     
-    if (score == 0) {
-        finish(false);
+    if (score <= 0) {
+      finish(false);
     }
     
     if (circleX >= 1800) {
@@ -114,25 +104,38 @@ void draw() {
   }
 }
 
-
-
 void finish(boolean win) {
   running = false;
 
   if (win) {
-    background(0,255,0);
+    background(0, 255, 0);
   } else {
-    background(255,0,0);
+    background(255, 0, 0);
   }
   
   fill(0);
   textAlign(CENTER);
   textSize(70);
-  text("Ende", 960, 300);
+  text("Ende", width/2, height/3);
   textSize(50);
-  text("Score: " + (10 - score), 960, 540);
+  text("Score: " + score, width/2, height/2);
+  text("Press Space-Bar to play again", width/2, height/2 + 100);
 }
 
+void keyPressed() {
+  if (!running && key == ' ') {   // Neustart nur im Ende-Menü
+    startGame();
+  }
+}
+
+void startGame() {
+  score = 10;                  // Score zurück auf Anfang
+  circleSize = 100;            // Kreisgröße reset
+  circleX = 60;                // Startposition reset
+  circleY = 60;
+  ccr = 211; ccg = 211; ccb = 211; 
+  running = true;              // Spiel läuft wieder
+}
 
 void mousePressed() {
   float d = dist(mouseX, mouseY, circleX, circleY);
@@ -144,16 +147,6 @@ void mousePressed() {
 void mouseReleased() {
   dragging = false;
 }
-/*
-// Prüft, ob der gesamte Kreis auf weißem Korridor bleibt
-boolean isWhiteArea(float x, float y) {
-  
-  
-  return true;
-}
-
-
-*/
 
 boolean isWhiteArea(float x, float y, float r) {
   int steps = 36;
