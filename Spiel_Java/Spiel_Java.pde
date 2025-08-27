@@ -9,48 +9,59 @@ int shrink = 9;
 
 //Tracking
 boolean dragging = false;  
-boolean touching = false;  
 
+
+boolean touching = false;  
 boolean running = true;
+
 
 
 //Color of the Ball
 int ccr = 211;
 int ccg = 211;
 int ccb = 211;
-int round = 40;
 
+
+
+int round = 40;
 
 void settings() {
   fullScreen();
 }
 
+
+
+void setup() {
+  startGame(); 
+}
+
+
 void draw() {
   if (running) {
-    background(0,0,200); // Blau = Wand
+    background(0, 0, 200); // Blau = Wand
 
     // Startpunkt (rot)
-    fill(255,0,0);
+    fill(255, 0, 0);
     noStroke();
-    rect(0,0,120,120);
+    rect(0, 0, 120, 120);
   
     // Korridore (weiß)
     stroke(255);
     fill(255);
-    rect(120,0,880,120);
-    rect(1000,0,120,470);
-    rect(1000,350,-800,120);
-    rect(200,350,120,470);
-    rect(200,700,1200,120);
-    rect(1280,220,120,600);
-    rect(1280,200,300,120);
-    rect(1575,200,120,800);
-    rect(1575,900,400,120);
+    rect(120, 0, 880, 120);
+    rect(1000, 0, 120, 470);
+    rect(1000, 350, -800, 120);
+    rect(200, 350, 120, 470);
+    rect(200, 700, 1200, 120);
+    rect(1280, 220, 120, 600);
+    rect(1280, 200, 300, 120);
+    rect(1575, 200, 120, 800);
+    rect(1575, 900, 400, 120);
   
     // Endpunkt (grün)
     stroke(255);
-    fill(0,255,0);
-    rect(1800,900,120,120);
+    fill(0, 255, 0);
+    rect(1800, 900, 120, 120);
   
     // === Bewegung berechnen ===
     if (dragging) {
@@ -90,56 +101,82 @@ void draw() {
       }
     }
     
-    //Kreis Zeichnen
-    
+
     stroke(211);
     fill(ccr, ccg, ccb);
     ellipse(circleX, circleY, circleSize, circleSize); 
-    
   
     // Score anzeigen
     fill(0);
     textSize(24);
     text("Score: " + score, 20, 40);
     
+
     // Finish triggers
     if (score == 0) {
         finish(false);
     }
+
     if (circleX >= 1805 + (circleSize/2)) {
       finish(true);
     }
   }
 }
 
-
-
 void finish(boolean win) {
   running = false;
 
   if (win) {
-    background(0,255,0);
+    background(0, 255, 0);
   } else {
-    background(255,0,0);
+    background(255, 0, 0);
   }
+  
+  fill(0);
+  textAlign(CENTER);
+  
+  
+  textSize(70);
+  text("Ende", width/2, height/3);
+  
   
   PFont font;
   font = loadFont("Anurati-Regular-48.vlw");
   textFont(font);
   
-  
-  fill(0);
-  textAlign(CENTER);
   textSize(100);
-  text("ENDE", 960, 300);
+  text("ENDE", width/2, 300);
+  
+  
   
   font = loadFont("AgencyFB-Bold-48.vlw");
   textFont(font);
   
   textSize(50);
-  text("SCORE: " + score, 960, 540);
+  text("SCORE: " + score, width/2, 540);
+
+
+  textSize(50);
+  text("Press Space-Bar to play again", width/2, height/2 + 100);
+  
+  
+  textAlign(LEFT);
 }
 
+void keyPressed() {
+  if (!running && key == ' ') {   // Neustart nur im Ende-Menü
+    startGame();
+  }
+}
+
+void startGame() {
+  score = 10;                  // Score zurück auf Anfang
+  circleSize = 100;            // Kreisgröße reset
+  circleX = 60;                // Startposition reset
+  circleY = 60;
+  ccr = 211; ccg = 211; ccb = 211; 
+  running = true;              // Spiel läuft wieder
+}
 
 void mousePressed() {
   float d = dist(mouseX, mouseY, circleX, circleY);
@@ -151,7 +188,6 @@ void mousePressed() {
 void mouseReleased() {
   dragging = false;
 }
-
 
 
 boolean isWhiteArea(float x, float y, float r) {
