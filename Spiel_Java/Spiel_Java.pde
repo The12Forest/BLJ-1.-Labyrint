@@ -1,5 +1,5 @@
-int score = 10;
 
+// TODO Print array to screen on line 164
 
 //Ball cords and Size
 float circleX = 60; 
@@ -13,17 +13,23 @@ boolean dragging = false;
 
 boolean touching = false;  
 boolean running = true;
-
+int score = 10;
 
 
 //Color of the Ball
 int ccr = 211;
 int ccg = 211;
 int ccb = 211;
-
-
-
 int round = 40;
+
+
+//Highscore
+  IntDict list;
+void highscoresetup() {
+  list = new IntDict();
+
+}
+
 
 void settings() {
   fullScreen();
@@ -32,6 +38,7 @@ void settings() {
 
 
 void setup() {
+  highscoresetup();
   startGame(); 
 }
 
@@ -128,9 +135,40 @@ void finish(boolean win) {
 
   if (win) {
     background(0, 255, 0);
+    list.set("Player 12", score);
+    list.sortValues();
+    if (list.size() > 10) {
+      for (String k : list.keys()) {
+        if (list.get(k) == 10) {
+          list.remove(k);
+        }
+      }
+    }
   } else {
     background(255, 0, 0);
   }
+  
+  //Insret List
+  
+  int sizelist = 30;
+  int space = 10;
+  int startx = (width/4*3);
+  int starty = 50;
+  
+  int rl = 0;
+  int ls = list.size();
+  
+  while (rl < ls) {    
+    fill(255);
+    textSize(16);
+    
+    
+    rl++;
+  }
+
+  
+  //End Screen
+  
   
   fill(0);
   textAlign(CENTER);
