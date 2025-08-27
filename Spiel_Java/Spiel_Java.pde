@@ -9,7 +9,9 @@ boolean touching = false;
 boolean running = true;
 
 
-
+int ccr = 211;
+int ccg = 211;
+int ccb = 211;
 
 
 
@@ -65,6 +67,14 @@ void draw() {
         }
         score--;
         println("Score: " + score + " | Kreisgröße: " + circleSize);
+        
+        ccr = 255;
+        ccg = 0;
+        ccb = 0;
+      } else {
+        ccr = 211;
+        ccg = 211;
+        ccb = 211;
       }
       touching = isTouching;
   
@@ -76,7 +86,7 @@ void draw() {
     
     // === Kreis erst jetzt zeichnen ===
     stroke(211);
-    fill(211);
+    fill(ccr, ccg, ccb);
     ellipse(circleX, circleY, circleSize, circleSize); 
   
     // Score anzeigen
@@ -104,9 +114,6 @@ void finish(boolean win) {
   text("Ende", 960, 300);
   textSize(50);
   text("Score: " + score, 960, 540);
-  
-
-  
 
   
 }
