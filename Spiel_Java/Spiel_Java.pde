@@ -161,6 +161,8 @@ void finish(boolean win) {
   
   
   textAlign(LEFT);
+  font = loadFont("LucidaSans-48.vlw");
+  textFont(font);
 }
 
 void keyPressed() {
