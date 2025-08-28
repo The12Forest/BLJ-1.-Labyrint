@@ -41,10 +41,10 @@ void draw() {
   if (running) {
     background(0, 0, 200); // Blau = Wand
 
-    // Startpunkt (rot)
+    // Startpunkt (rot) 
     fill(255, 0, 0);
     noStroke();
-    rect(0, 0, 120, 120);
+    rect(0, 0, 120, 120); 
   
     // Korridore (weiß)
     stroke(255);
@@ -101,7 +101,7 @@ void draw() {
         circleY = newY;
       }
     }
-    
+    checkdorway();
 
     stroke(211);
     fill(ccr, ccg, ccb);
@@ -122,6 +122,6 @@ void draw() {
       finish(true);
     }
     
-    checkdorway();
+    
   }
 }

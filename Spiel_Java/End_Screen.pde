@@ -44,4 +44,7 @@ void startGame() {
   circleY = 60;
   ccr = 211; ccg = 211; ccb = 211; 
   running = true;              // Spiel läuft wieder
+  Godkey = false;
+  Goddoor = false;
+
 }

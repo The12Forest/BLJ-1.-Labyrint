@@ -10,6 +10,14 @@ boolean isWhiteArea(float x, float y, float r) {
       // nur weiß, rot (Start) oder grün (Ziel) erlaubt
       return false;
     }
+    if (!Godkey) {
+      if (circleX > 1500) {
+        if (circleY > 650 - circleSize/2) {
+          circleY -= 5;
+          return false;
+        }
+      }
+    }
   }
   return true;
 }
