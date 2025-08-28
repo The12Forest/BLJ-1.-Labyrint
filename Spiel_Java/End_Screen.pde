@@ -26,12 +26,7 @@ void endscreentext() {
   textSize(50);
   text("SCORE: ", width/2, 540);
   text("TIME : ", width/2, 600);
-  text("Overall SCORE : ", width/2, 660);
-
-
- 
-  
-  
+  text("Overall SCORE : ", width/2, 660);  
   
   textSize(50);
   text("Press Space-Bar to play again", width/2, height/20*18);

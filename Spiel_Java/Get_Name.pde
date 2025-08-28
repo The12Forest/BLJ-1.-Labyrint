@@ -18,8 +18,6 @@ void keyPressedusername() {
 }
 
 
-
-
 void uioftypeing() {
   background(211);
   

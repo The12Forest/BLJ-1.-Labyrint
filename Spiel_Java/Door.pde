@@ -13,10 +13,10 @@ void checkdorway() {
   }
 
   if (Goddoor) {
-    keyImg = loadImage("Key.png");
+    keyImg = loadImage("data/Key.png");
     image(keyImg, 200, 0, 80, 81);
 
-    // Kollisionsabfrage für den Schlüssel
+    // Kollisionsabfrage für Schlüssel
     if (Goddoor && !Godkey) {
       if (circleX > 200 && circleX < 200 + 80 &&
           circleY > 0 && circleY < 0 + 81) {

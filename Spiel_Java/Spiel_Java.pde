@@ -1,12 +1,7 @@
 
-// TODO Print array to screen on line 164
-
 //Doorway
-
 boolean Godkey = false;
 boolean Goddoor = false;
-
-
 
 //Ball cords and Size
 float circleX = 60; 
@@ -16,14 +11,13 @@ int shrink = 9;
 
 //Tracking
 boolean dragging = false;  
-
-
 boolean touching = false;  
 boolean running = true;
+
+//Score
 int score = 10;
 int scoreout = 0;
 int scorenown() {scoreout = int((((score - 11)*-1) * elapsed()) / 100); return scoreout;}
-
 
 //Color of the Ball
 int ccr = 211;
@@ -41,9 +35,6 @@ ArrayList<Integer> scr = new ArrayList<Integer>();
 //Nameinput
 String input = "";
 boolean typing = true;
-//boolean inname = false;
-//boolean usereingabe = false;
-
 
 //Time
 int startTime;
@@ -59,12 +50,11 @@ void draw() {
   if (running) {
     background(0, 0, 200); // Blau = Wand
 
-    // Startpunkt (rot) 
     fill(255, 0, 0);
     noStroke();
     rect(0, 0, 120, 120); 
   
-    // Korridore (weiß)
+    // Ways
     stroke(255);
     fill(255);
     rect(120, 0, 880, 120);
@@ -77,12 +67,12 @@ void draw() {
     rect(1575, 200, 120, 800);
     rect(1575, 900, 400, 120);
   
-    // Endpunkt (grün)
+    // Endpunkt
     stroke(255);
     fill(0, 255, 0);
     rect(1800, 900, 120, 120);
   
-    // === Bewegung berechnen ===
+    // Moving
     if (dragging) {
       float newX = constrain(mouseX, circleSize/2, width - circleSize/2);
       float newY = constrain(mouseY, circleSize/2, height - circleSize/2);
@@ -138,7 +128,6 @@ void draw() {
     }
 
     if (circleX >= 1805 + (circleSize/2)) {
-    //if (circleX >= 400 + (circleSize/2)) {
       typing = true;
       scorenown();
       uioftypeing();
