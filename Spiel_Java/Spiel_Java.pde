@@ -1,6 +1,13 @@
 
 // TODO Print array to screen on line 164
 
+//Doorway
+
+boolean Godkey = false;
+boolean Goddoor = false;
+
+
+
 //Ball cords and Size
 float circleX = 60; 
 float circleY = 60;
@@ -114,5 +121,7 @@ void draw() {
     if (circleX >= 1805 + (circleSize/2)) {
       finish(true);
     }
+    
+    checkdorway();
   }
 }
