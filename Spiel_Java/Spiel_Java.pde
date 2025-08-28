@@ -1,4 +1,3 @@
-
 //Doorway
 boolean Godkey = false;
 boolean Goddoor = false;
