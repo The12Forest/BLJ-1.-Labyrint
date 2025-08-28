@@ -57,5 +57,7 @@ void startGame() {
   running = true;
   startTime = millis();
   try {input = "";} catch (Throwable t) {}
-  
+  running = true;              // Spiel läuft wieder
+  Godkey = false;
+  Goddoor = false;
 }
