@@ -22,26 +22,13 @@ int ccg = 211;
 int ccb = 211;
 int round = 40;
 
+ArrayList<String> usr = new ArrayList<String>();
+ArrayList<Integer> scr = new ArrayList<Integer>();
+
 
 //Highscore
-  IntDict list;
-void highscoresetup() {
-  list = new IntDict();
-
-}
-
-
-void settings() {
-  fullScreen();
-}
-
-
-
-void setup() {
-  highscoresetup();
-  startGame(); 
-}
-
+//String[] usr = {"Player1", "Player2", "Player3", "Player4", "Player5", "Player6", "Player7", "Player8", "Player9", "Player10", "Player11"};
+//int[] scr = {0,0,0,0,0,0,0,0,0,0,0,0};
 
 void draw() {
   if (running) {
@@ -128,120 +115,4 @@ void draw() {
       finish(true);
     }
   }
-}
-
-void finish(boolean win) {
-  running = false;
-
-  if (win) {
-    background(0, 255, 0);
-    list.set("Player 12", score);
-    list.sortValues();
-    if (list.size() > 10) {
-      for (String k : list.keys()) {
-        if (list.get(k) == 10) {
-          list.remove(k);
-        }
-      }
-    }
-  } else {
-    background(255, 0, 0);
-  }
-  
-  //Insret List
-  
-  int sizelist = 30;
-  int space = 10;
-  int startx = (width/4*3);
-  int starty = 50;
-  
-  int rl = 0;
-  int ls = list.size();
-  
-  while (rl < ls) {    
-    fill(255);
-    textSize(16);
-    
-    
-    rl++;
-  }
-
-  
-  //End Screen
-  
-  
-  fill(0);
-  textAlign(CENTER);
-  
-  
-  textSize(70);
-  text("Ende", width/2, height/3);
-  
-  
-  PFont font;
-  font = loadFont("Anurati-Regular-48.vlw");
-  textFont(font);
-  
-  textSize(100);
-  text("ENDE", width/2, 300);
-  
-  
-  
-  font = loadFont("AgencyFB-Bold-48.vlw");
-  textFont(font);
-  
-  textSize(50);
-  text("SCORE: " + score, width/2, 540);
-
-
-  textSize(50);
-  text("Press Space-Bar to play again", width/2, height/2 + 100);
-  
-  
-  textAlign(LEFT);
-  font = loadFont("LucidaSans-48.vlw");
-  textFont(font);
-}
-
-void keyPressed() {
-  if (!running && key == ' ') {   // Neustart nur im Ende-Menü
-    startGame();
-  }
-}
-
-void startGame() {
-  score = 10;                  // Score zurück auf Anfang
-  circleSize = 100;            // Kreisgröße reset
-  circleX = 60;                // Startposition reset
-  circleY = 60;
-  ccr = 211; ccg = 211; ccb = 211; 
-  running = true;              // Spiel läuft wieder
-}
-
-void mousePressed() {
-  float d = dist(mouseX, mouseY, circleX, circleY);
-  if (d < circleSize/2) {  
-    dragging = true;
-  }
-}
-
-void mouseReleased() {
-  dragging = false;
-}
-
-
-boolean isWhiteArea(float x, float y, float r) {
-  int steps = 36;
-  for (int i = 0; i < steps; i++) {
-    float angle = TWO_PI * i / steps;
-    int px = int(x + cos(angle) * r);
-    int py = int(y + sin(angle) * r);
-    if (px < 0 || px >= width || py < 0 || py >= height) return false;
-    color c = get(px, py);
-    if (c != color(255) && c != color(255,0,0) && c != color(0,255,0)) {
-      // nur weiß, rot (Start) oder grün (Ziel) erlaubt
-      return false;
-    }
-  }
-  return true;
 }
