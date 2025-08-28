@@ -14,4 +14,8 @@ void keyPressed() {
   if (!running && key == ' ') {   // Neustart nur im Ende-Menü
     startGame();
   }
+  
+  if (typing) {
+    keyPressedusername();
+  }
 }

@@ -4,5 +4,6 @@ void settings() {
 
 
 void setup() {
-  startGame(); 
+  startGame();
+  startTime = millis();
 }

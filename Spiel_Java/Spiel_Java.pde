@@ -14,6 +14,8 @@ boolean dragging = false;
 boolean touching = false;  
 boolean running = true;
 int score = 10;
+int scoreout = 0;
+int scorenown() {scoreout = int((((score - 11)*-1) * elapsed()) / 100); return scoreout;}
 
 
 //Color of the Ball
@@ -22,13 +24,29 @@ int ccg = 211;
 int ccb = 211;
 int round = 40;
 
+//Font
+PFont font;
+
+//Highscore
 ArrayList<String> usr = new ArrayList<String>();
 ArrayList<Integer> scr = new ArrayList<Integer>();
 
+//Nameinput
+String input = "";
+boolean typing = true;
+//boolean inname = false;
+//boolean usereingabe = false;
 
-//Highscore
-//String[] usr = {"Player1", "Player2", "Player3", "Player4", "Player5", "Player6", "Player7", "Player8", "Player9", "Player10", "Player11"};
-//int[] scr = {0,0,0,0,0,0,0,0,0,0,0,0};
+
+//Time
+int startTime;
+int elapsed() {return int((millis() - startTime)/10);}
+int elapsedout() {return int((millis() - startTime)/1000);}
+
+//ScoreCount
+float scnow = 0;
+float factor() {return (score/100);}
+
 
 void draw() {
   if (running) {
@@ -108,11 +126,19 @@ void draw() {
 
     // Finish triggers
     if (score == 0) {
-        finish(false);
+      finish(false);
+      scorenown();
     }
 
     if (circleX >= 1805 + (circleSize/2)) {
-      finish(true);
+    //if (circleX >= 400 + (circleSize/2)) {
+      typing = true;
+      scorenown();
+      uioftypeing();
+      
+      
     }
+    
+    
   }
 }
