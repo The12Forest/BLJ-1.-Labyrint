@@ -32,6 +32,7 @@ ArrayList<String> usr = new ArrayList<String>();
 ArrayList<Integer> scr = new ArrayList<Integer>();
 
 //Nameinput
+boolean top10 = true;
 String input = "";
 boolean typing = true;
 
@@ -125,15 +126,10 @@ void draw() {
       finish(false);
       scorenown();
     }
-
     if (circleX >= 1805 + (circleSize/2)) {
       typing = true;
       scorenown();
       uioftypeing();
-      
-      
-    }
-    
-    
+    }    
   }
 }
